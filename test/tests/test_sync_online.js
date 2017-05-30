@@ -1,11 +1,6 @@
 var process = require("process");
-if(document && document.location){
-  if(document.location.href.indexOf("coverage=1") > -1){
-    process.env.LIB_COV = 1;
-  }
-}
 
-var syncClient = process.env.LIB_COV? require("../../src-cov/modules/sync-cli") : require("../../src/modules/sync-cli");
+var syncClient = require("../../src/sync-client");
 var chai = require('chai');
 var expect = chai.expect;
 var sinonChai = require('sinon-chai');
@@ -42,7 +37,7 @@ describe("test sync framework online with fake XMLHttpRequest", function(){
       storage_strategy: ['memory'],
       crashed_count_wait: 0
     });
-    syncClient.manage(dataSetId, {"sync_active": false, "has_custom_sync": false}, {}, {}, done);
+    syncClient.manage(dataSetId, {"sync_active": false}, {}, {}, done);
   });
 
   beforeEach(function(done){
@@ -56,7 +51,7 @@ describe("test sync framework online with fake XMLHttpRequest", function(){
 
 
 
-    syncClient.manage(dataSetId, {"has_custom_sync": false}, {}, {}, function(){
+    syncClient.manage(dataSetId, {}, {}, {}, function(){
       syncClient.clearPending(dataSetId, function(){
         done();
       });
@@ -802,7 +797,7 @@ describe("test sync framework online with fake XMLHttpRequest", function(){
   });
 
   it("test updateCrashedInFlightFromNewData create", function(done){
-    syncClient.setConfig(dataSetId, {crashed_count_wait: 10, has_custom_sync: false}, function(){
+    syncClient.setConfig(dataSetId, {crashed_count_wait: 10}, function(){
       var createRecord = {name:'item13'};
       syncClient.doCreate(dataSetId, createRecord, function(){
         onSync(function(){
@@ -959,7 +954,7 @@ describe("test sync framework online with fake XMLHttpRequest", function(){
   });
 
   it("test updateCrashedInFlightFromNewData resend", function(done){
-    syncClient.setConfig(dataSetId, {"resend_crashed_updates": false, "crashed_count_wait": 0, "has_custom_sync": false}, function(){
+    syncClient.setConfig(dataSetId, {"resend_crashed_updates": false, "crashed_count_wait": 0}, function(){
       syncClient.doCreate(dataSetId, {name: "item16"}, function(){
         onSync(function(){
           var reqObj = requests[0];
@@ -1033,44 +1028,6 @@ describe("test sync framework online with fake XMLHttpRequest", function(){
     expect(success).to.have.been.calledWith({});
 
     done();
-  });
-
-
-  it("test checkHasCustomSync", function(done){
-
-    var resetCustomSync = function(cb){
-      syncClient.manage(dataSetId, {has_custom_sync: null}, {}, {}, cb);
-    }
-
-    resetCustomSync(function(){
-      syncClient.checkHasCustomSync(dataSetId, function(){});
-      expect(requests.length).to.equal(1);
-      var reqObj = requests[0];
-      reqObj.respond(200, header, null);
-
-      var dataset = syncClient.getDataset(dataSetId, function(dataset){
-        expect(dataset.config.has_custom_sync).to.be.true;
-
-        resetCustomSync(function(){
-          syncClient.checkHasCustomSync(dataSetId, function(){});
-          var reqObj1 = requests[1];
-          reqObj1.respond(500, header, null);
-          expect(dataset.config.has_custom_sync).to.be.true;
-
-          resetCustomSync(function(){
-            syncClient.checkHasCustomSync(dataSetId, function(){});
-            expect(requests.length).to.equal(3);
-            var reqObj2 = requests[2];
-            reqObj2.respond(404, header, null);
-
-            expect(dataset.config.has_custom_sync).to.be.false;
-
-            done();
-          });
-        });
-      });
-    });
-
   });
 
   it("test uid change", function(done){

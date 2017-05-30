@@ -1,12 +1,9 @@
 {
   "name": "fh-sync-js",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "Javascript client for fh-sync offline synchronization library",
   "main": "dist/fh-sync.js",
   "types": "./fh-js-sdk.d.ts",
-  "browser": {
-    "JSON": "./libs/json2.js"
-  },
   "browserify-shim": {
     "JSON": {
       "exports": "JSON"
@@ -24,43 +21,15 @@
       "browserify-shim"
     ]
   },
-  "testling": {
-    "harness": "mocha-bdd",
-    "scripts": [
-      "test/browser/libs/sinon/sinon.js",
-      "test/browser/libs/sinon/sinon-ie.js"
-    ],
-    "files": "test/tests/*.js",
-    "browsers": [
-      "ie/9..10",
-      "firefox/5.0",
-      "firefox/latest",
-      "chrome/7.0",
-      "chrome/latest",
-      "safari/5.0.5",
-      "safari/latest",
-      "opera/11",
-      "opera/next",
-      "iphone/6.0",
-      "ipad/6.0",
-      "android-browser/latest"
-    ]
-  },
   "scripts": {
-    "test": "grunt test",
-    "prepublish": "grunt concat-core-sdk",
-    "doc:clean": "rimraf doc",
-    "doc:generate": "typedoc --includeDeclarations --excludeExternals --out doc ./fh-js-sdk.d.ts",
-    "doc:gh-pages": "touch doc/.nojekyll; git add doc/.*; git add doc/*; git commit -m 'Publishing to gh-pages'; git push origin :gh-pages --force ; git subtree push --prefix doc origin gh-pages",
-    "doc": "npm run doc:clean && npm run doc:generate && npm run doc:gh-pages"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/feedhenry/fh-js-sdk.git"
+    "url": "git://github.com/feedhenry/fh-sync-js.git"
   },
-  "author": "",
-  "license": "Copyright (c) 2014 FeedHenry Ltd, All Rights Reserved.",
-  "gitHead": "251a1f88a39f59f2652552ae245893a833faee71",
+  "author": "Feedhenry Team",
+  "license": "Apache 2.0",
   "dependencies": {
     "type-of": "~2.0.1",
     "loglevel": "~0.6.0",
