@@ -6,14 +6,32 @@
   crossorigin="anonymous"></script>
   <!-- TODO improve example to use local distribution build !-->
   <script src="../dist/fh-sync.js" type="text/javascript"></script>
+  <script src="./todo.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
+
+<div id="myDIV" class="header">
+  <h2>My To Do List</h2>
+  <input type="text" id="myInput" placeholder="Title...">
+  <span onclick="newElement()" class="addBtn">Add</span>
+</div>
+
+<ul id="myUL">
+  <li>First item</li>
+  <!--<li>Hit the gym</li>
+  <li class="checked">Pay bills</li>
+  <li>Meet George</li>
+  <li>Buy eggs</li>
+  <li>Read a book</li>
+  <li>Organize office</li>-->
+</ul>
 
 <script type="text/javascript">
   // setup sync cloud handler
     $fh.sync.setCloudHandler(function (params, success, failure) {
       $.ajax({
-        'path': 'http://localhost:8000/mbaas/sync/' + params.dataset_id,
+        'path': 'http://localhost:3000/sync/' + params.dataset_id,
         'method': 'post',
         'data': params.req
       }, function (res) {
