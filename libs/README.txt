@@ -1,1 +1,1 @@
-This dir is for third party libraries. To add a library to the final dist/feedhenry-latest.js you will need to add it to the grunt.js file
+This dir is for third party libraries. To add a library to the final dist you will need to add it to the grunt.js file

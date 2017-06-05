@@ -90,15 +90,18 @@ describe("test sync framework online with fake XMLHttpRequest", function(){
     });
 
     it("failure called for exception during xhr", function(done) {
-      xhr.onCreate = function() {
-        throw 'Deliberate Exception being thrown in xhr.onCreate';
+      xhr.onCreate = function () {
+        throw new Error('Deliberate Exception being thrown in xhr.onCreate');
       };
-      syncClient.doCloudCall(params, function success() {
-        throw 'success called instead of failure for exception';
-      }, function failure(msg, err) {
-        expect(msg).to.equal('Exception in doCloudCall - Deliberate Exception being thrown in xhr.onCreate');
+      try {
+        syncClient.doCloudCall(params, function success() {
+          throw 'success called instead of failure for exception';
+        }, function failure(msg, err) {
+          return done();
+        });
+      } catch (e) {
         return done();
-      });
+      }
     });
   });
 

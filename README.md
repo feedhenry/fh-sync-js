@@ -4,45 +4,32 @@ FeedHenry Sync Javascript client
 [Note] This repository it's currently in development for production version
 please refer to fh-js-sdk npm module.
 
+## Required setup
+
+Sync client using default Ajax handler to call sync server. 
+Server URL can be configured using following variables
+
+- cloudUrl - URL to sync server
+- cloudPath (optional) - allows to use custom endpoint for sync (defaults to `/mbaas/sync/`)
+
+For example: 
+```javascript
+syncClient.init({
+    cloudUrl:"http://localhost:3000",
+    do_console_log: true,
+    sync_frequency: 1,
+    sync_active: false,
+    storage_strategy: ['memory'],
+    crashed_count_wait: 0
+});
+```
+
 ## Building
 
-The JS SDK is now built using [Browserify](http://browserify.org/).
+    npm install
+    grunt 
 
-### Development
+## Relation for fh-js-sdk
 
-Because of Browserify, you can write any new functions as normal node modules, and use node's "require" to load any other modules, or to be consumed by other modules.
+Feedhenry JS SDK contains various libraries and also includes fh-sync-js library.
 
-### Testing
-
-Write your tests in test/tests directory. Add the tests to test/browser/suite.js file and run
-
-```
-grunt test
-```
-
-This will use mocha and phatomjs to run the tests.
-
-In fact, if your module and test don't require a browser environment, you can just run them purely in node. (You may need to add a new grunt task to run them).
-
-To help debugging, you can run
-
-```
-grunt local
-```
-
-This will start mock servers locally and you can go to http://localhost:8200/example/index.html page to debug. You may want to run
-
-```
-grunt watch
-```
-
-In another terminal window to auto generate the combined js sdk file.
-
-### Build
-
-When finish developing and testing, run
-
-```
-grunt
-```
-To generate the release builds.

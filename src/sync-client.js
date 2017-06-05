@@ -1,5 +1,6 @@
 var CryptoJS = require("../libs/generated/crypto");
 var Lawnchair = require('../libs/generated/lawnchair');
+var defaultCloudHandler = require('./cloudHandler');
 
 var self = {
 
@@ -100,6 +101,7 @@ var self = {
       self.init_is_called = true;
       self.datasetMonitor();
     }
+    defaultCloudHandler.init(self.config.cloudUrl, self.config.cloudPath);
   },
 
   notify: function(datasetId, callback) {
@@ -113,7 +115,7 @@ var self = {
   manage: function(dataset_id, opts, query_params, meta_data, cb) {
     self.consoleLog('manage - START');
 
-    // Currently we do not enforce the rule that init() funciton should be called before manage().
+    // Currently we do not enforce the rule that init() function should be called before manage().
     // We need this check to guard against self.config undefined
     if (!self.config){
       self.config = JSON.parse(JSON.stringify(self.defaults));
@@ -1219,9 +1221,9 @@ var self = {
 
 (function() {
   self.config = self.defaults;
-  //Initialse the sync service with default config
-  //self.init({});
 })();
+
+self.setCloudHandler(defaultCloudHandler.handler);
 
 module.exports = {
   init: self.init,
@@ -1251,5 +1253,6 @@ module.exports = {
   generateHash: self.generateHash,
   loadDataSet: self.loadDataSet,
   clearCache: self.clearCache,
-  setCloudHandler: self.setCloudHandler
+  setCloudHandler: self.setCloudHandler,
+  doCloudCall: self.doCloudCall
 };

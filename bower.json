@@ -1,20 +1,18 @@
 {
-  "name": "fh-js-sdk",
-  "version": "2.17.0",
-  "homepage": "https://github.com/feedhenry/fh-js-sdk",
+  "name": "fh-sync-js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/feedhenry/fh-sync-js",
   "authors": [
     "npm@feedhenry.com"
   ],
-  "description": "FeedHenry JS SDK",
-  "main": "dist/feedhenry.js",
+  "description": "Feedhenry sync",
+  "main": "dist/fh-sync.js",
   "keywords": [
     "feedhenry",
     "mobile",
-    "html5",
-    "mbaas",
-    "sdk"
+    "fhsync"
   ],
-  "license": "Copyright (c) 2014 FeedHenry Ltd, All Rights Reserved.",
+  "license": "Apache 2.0 License",
   "ignore": [
     "**/.*",
     "node_modules",

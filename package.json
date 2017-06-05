@@ -16,7 +16,7 @@
     }
   },
   "browserify": {
-    "standalone": "feedhenry",
+    "standalone": "fh-sync",
     "transform": [
       "browserify-shim"
     ]
