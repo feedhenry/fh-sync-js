@@ -10,7 +10,7 @@ Sync client using default Ajax handler to call sync server.
 Server URL can be configured using following variables
 
 - cloudUrl - URL to sync server
-- cloudPath (optional) - allows to use custom endpoint for sync (defaults to `/mbaas/sync/`)
+- cloudPath (optional) - allows to use custom endpoint for sync (defaults to `/sync/`)
 
 For example: 
 ```javascript

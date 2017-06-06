@@ -2,12 +2,13 @@ var cloudURL;
 var cloudPath;
 
 /**
- * Default sync cloud handler responsible for 
+ * Default sync cloud handler responsible for making all sync requests to 
+ * server. 
  */
 var handler = function (params, success, failure) {
     if (!cloudPath) {
         // Default server sync api route
-        cloudPath = '/mbaas/sync/';
+        cloudPath = '/sync/';
     }
     var url = cloudURL + cloudPath + params.dataset_id;
     var json = JSON.stringify(params.req);
@@ -35,6 +36,12 @@ var handler = function (params, success, failure) {
     xhr.send(json);
 };
 
+/**
+ * Default sync cloud handler init method
+ * 
+ * @param url - for example http://example.com:7000
+ * @param path - api path (will default to '/sync')
+ */
 var init = function (url, path) {
     cloudURL = url;
     cloudPath = path;

@@ -113,7 +113,7 @@ describe("test sync framework online with fake XMLHttpRequest", function(){
       expect(requests.length).to.equal(1);
 
       var reqObj = requests[0];
-      expect(reqObj.url).to.have.string("/mbaas/sync/" + dataSetId);
+      expect(reqObj.url).to.have.string("/sync/" + dataSetId);
       expect(reqObj.method.toLowerCase()).to.equal("post");
       var reqBody = JSON.parse(reqObj.requestBody);
       expect(reqBody.fn).to.equal("sync");
@@ -227,7 +227,7 @@ describe("test sync framework online with fake XMLHttpRequest", function(){
       var reqObj1 = requests[2];
       var reqBody1 = JSON.parse(reqObj1.requestBody);
 
-      expect(reqObj1.url).to.have.string("/mbaas/sync/" + dataSetId);
+      expect(reqObj1.url).to.have.string("/sync/" + dataSetId);
       expect(reqBody1.fn).to.equal("syncRecords");
       expect(_.size(reqBody1.clientRecs)).to.equal(1); //there is one record in the client
 
