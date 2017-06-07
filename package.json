@@ -1,6 +1,6 @@
 {
   "name": "fh-sync-js",
-  "version": "1.0.0",
+  "version": "1.0.0-pre2",
   "description": "Javascript client for fh-sync offline synchronization library",
   "main": "dist/fh-sync.js",
   "types": "./fh-js-sdk.d.ts",
