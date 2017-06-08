@@ -53,7 +53,6 @@ module.exports = function(grunt) {
         options: {
           urls: [
             "http://127.0.0.1:8200/test/browser/index.html?url=http://localhost:9999",
-            "http://127.0.0.1:8200/test/browser/index-require.html"
           ]
         }
       },

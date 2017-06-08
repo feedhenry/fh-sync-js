@@ -10,26 +10,12 @@
 <body>
 
 <script type="text/javascript">
-  // setup sync cloud handler
-    $fh.sync.setCloudHandler(function (params, success, failure) {
-      $.ajax({
-        'path': 'http://localhost:8000/mbaas/sync/' + params.dataset_id,
-        'method': 'post',
-        'data': params.req
-      }, function (res) {
-        callbackCalled = true;
-        success(res);
-      }, function (msg, err) {
-        callbackCalled = true;
-        failure(msg, err);
-    });
-  });
-
   // Standard sync setup for simple dataset
   var datasetId = "myShoppingList";
 
   //provide sync init options
   $fh.sync.init({
+    "cloudUrl": "http://localhost:3000",
     "sync_frequency": 10,
     "do_console_log": true,
     "storage_strategy": "dom"
@@ -38,6 +24,7 @@
   //provide listeners for notifications.
   $fh.sync.notify(function(notification){
     var code = notification.code
+    console.log("Sync ", notification);
     if('sync_complete' === code){
       //a sync loop completed successfully, list the update data
       $fh.sync.doList(datasetId,

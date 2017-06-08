@@ -119,6 +119,7 @@ describe("test sync framework offline", function(){
           startCallback(e.code);
           break;
         case "sync_failed":
+          console.log("e",e);
           failCallback(e.code);
           break;
         case "sync_complete":
