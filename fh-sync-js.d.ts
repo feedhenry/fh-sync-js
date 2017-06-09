@@ -92,8 +92,7 @@ declare module SyncClient {
          * 
          * @param {Function} callback
          */
-        function notify(callback: NotifyCallback);
-
+        function notify(dataset_id:string, callback:NotifyCallback);
         /**
          * Put a dataset under the management of the sync service.
          * 
@@ -182,7 +181,7 @@ declare module SyncClient {
          * @param {Function} success
          * @param {Function} failure
          */
-        function startSync(datasetId: string, success: () => void, failure: Function);
+        function startSync(datasetId: string, success: () => void, failure?: (obj: any) => void);
 
         /**
          * Stop the sync loop for a dataset.
@@ -191,7 +190,7 @@ declare module SyncClient {
          * @param {Function} [success]
          * @param {Function} [failure]
          */
-        function stopSync(datasetId: string, success?: () => void, failure?: (err: string, datasetId: string) => void);
+        function stopSync(datasetId: string, success?: () => void, failure?: (obj: any) => void);
 
         /**
          * Run the sync loop almost immediately (within next 500 ms) if `sync_active` is true.
@@ -218,7 +217,7 @@ declare module SyncClient {
          * @param {Function} success
          * @param {Function} failure
          */
-        function listCollisions(datasetId: string, success: (res: any) => void, failure: (msg: string, err: any) => void);
+        function listCollisions(datasetId: string, success: (res: any) => void, failure?: (msg: string, err: any) => void);
 
         /**
          * Remove a collision in sync
@@ -315,7 +314,7 @@ declare module SyncClient {
         /**
          * Sets default cloud call handler for sync. Required to make any sync requests to the cloud
          */
-        function setCloudHandler(handler: (params: any, success: function, failure: function) );
+        function setCloudHandler(handler: (params: any, success: Function, failure: Function) => void);
     }
 }
 
