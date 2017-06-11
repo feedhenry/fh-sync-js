@@ -314,7 +314,7 @@ declare module SyncClient {
         /**
          * Sets default cloud call handler for sync. Required to make any sync requests to the cloud
          */
-        function setCloudHandler(handler: (params: any, success: Function, failure: Function) => void);
+        function setCloudHandler(handler: (params: any, success: (response: any) => void, failure: (error:any) => void) => void);
     }
 }
 
