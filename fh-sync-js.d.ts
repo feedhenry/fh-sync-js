@@ -273,6 +273,7 @@ declare module SyncClient {
          * @param {String} datasetId
          * @param {Function} success
          * @param {Function} failure
+         * @param {any} metaData
          */
         function setMetaData(datasetId: string, metaData: any, success: (metaData: any) => void, failure: (err: string, datasetId: string) => void);
 
@@ -287,6 +288,7 @@ declare module SyncClient {
          * @param {String} datasetId
          * @param {Function} success
          * @param {Function} failure
+         * @param {any} config
          */
         function setConfig(datasetId: string, config: any, success: (config: any) => void, failure: (err: string, datasetId: string) => void);
 
