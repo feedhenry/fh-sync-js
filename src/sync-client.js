@@ -903,7 +903,12 @@ var self = {
       self.datasetMonitor();
     }, 500);
   },
-
+  
+  /** Allow to set custom storage adapter **/
+  setStorageAdapter: function(adapter){
+    self.getStorageAdapter = adapter;
+  },
+  
   getStorageAdapter: function(dataset_id, isSave, cb){
     var onFail = function(msg, err){
       var errMsg = (isSave?'save to': 'load from' ) + ' local storage failed msg: ' + msg + ' err: ' + err;
@@ -1254,5 +1259,6 @@ module.exports = {
   loadDataSet: self.loadDataSet,
   clearCache: self.clearCache,
   setCloudHandler: self.setCloudHandler,
-  doCloudCall: self.doCloudCall
+  doCloudCall: self.doCloudCall,
+  setStorageAdapter: self.setStorageAdapter
 };

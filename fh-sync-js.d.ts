@@ -312,9 +312,16 @@ declare module SyncClient {
         function clearCache(datasetId: string, callback?: () => void);
 
         /**
-         * Sets default cloud call handler for sync. Required to make any sync requests to the cloud
+         * Sets cloud call handler for sync. Required to make any sync requests to the server side (sync cloud)
          */
-        function setCloudHandler(handler: (params: any, success: Function, failure: Function) => void);
+        function setCloudHandler(handler: (params: any, success: (result:any) => void, failure: (error:any) => void) => void);
+                
+        /**
+         * Allows to override default storage adapter
+         *
+         * @param handler - function that wraps underlying storage solution
+         */
+        function setStorageAdapter(handler: (dataset_id:string, isSave: boolean, cb: any) => void);
     }
 }
 
