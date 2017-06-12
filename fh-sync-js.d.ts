@@ -4,13 +4,6 @@
 
 /** @module SyncClient */
 declare module SyncClient {
-    /**
-     * Sync namespace
-     * 
-     * @namespace Sync
-     */
-    export namespace Sync {
-
         /**
          * Interface for the data provided in the NotifyCallback in the notify function.
          * 
@@ -322,7 +315,6 @@ declare module SyncClient {
          * @param handler - function that wraps underlying storage solution
          */
         function setStorageAdapter(handler: (dataset_id:string, isSave: boolean, cb: any) => void);
-    }
 }
 
 export = SyncClient;
