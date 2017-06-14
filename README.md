@@ -68,7 +68,7 @@ sync.manage(datasetId: string, options:SyncOptions, query_params:{}, meta_data:{
 // Get a list of the records for the dataset.   
 sync.doList(datasetId: string, success:(dataset:any) => void, failure:(err:string, datasetId:string) => void);
  
-// Update the data associated with the unique id.
+// Create the data associated with the unique id.
 sync.doCreate(datasetId: string, data:any, success:(obj:any) => void, failure?:(err:string, datasetId:string)=> void);
 
 // Read a single data record. 
@@ -80,16 +80,16 @@ sync.doUpdate(datasetId:string, uid:string, data:any, success:(obj:any)=> void, 
 // Delete the data associated with the unique id. 
 sync.doDelete(datasetId:string, uid:string, success?:(obj:any)=> void, failure?:(err:string, datasetId:string)=> void);
 
-//Start the sync loop if 'sync_active' option is set to false.    
+//Start the sync loop if 'sync_active' option is set to false in the sync.init.    
 sync.startSync(datasetId:string, success:()=> void, failure?:(obj:any)=> void);
   
 // Stop the sync loop for a dataset. 
 sync.stopSync(datasetId:string, success?:()=> void, failure?:(obj:any)=> void);
 
-// Run the sync loop almost immediately (within next 500 ms) if sync_active is true. 
+// Run the sync loop almost immediately (within next 500 ms) if sync_active is true in the sync.init. 
 sync.doSync(datasetId, success?:()=> void, failure?:(err:string, datasetId:string)=> void);
   
-// Run the sync loop almost immediately (within next 500 ms) even if sync_active is false.  
+// Run the sync loop almost immediately (within next 500 ms) even if sync_active is false in the sync.init.  
 sync.forceSync(datasetId:string,success?: ()=> void, failure?: (err: string, datasetId: string)=> void);
  
  ```
