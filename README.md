@@ -52,7 +52,7 @@ https://developer.mozilla.org/en-US/docs/Tools/Tools_Toolbox
 
 ## Some Available Typescript sync API methods
 
-datasetId is 
+A dataset is the data that is created and used by the sync API.
 
 ```typescript
  
