@@ -13,7 +13,7 @@ Server URL can be configured using following variables
 - cloudUrl - URL to sync server
 - cloudPath (optional) - allows to use custom endpoint for sync (defaults to `/sync/`)
 
-Setting up your own server see
+
 For example: 
 ```javascript
 
