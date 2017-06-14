@@ -1,8 +1,8 @@
 FeedHenry Sync Javascript client
 ========================
- 
-[Note] This repository it's currently in development for production version
-please refer to fh-js-sdk npm module.
+
+Data synchonization javascript client.
+Library can be used for offline storage of mobile applications data.
 
 ## Required setup
 
@@ -34,9 +34,6 @@ syncClient.init({
     npm install
     grunt 
 
-## Relation for fh-js-sdk
-
-Feedhenry JS SDK contains various libraries and also includes fh-sync-js library.
 
 ## Example App
 
@@ -94,3 +91,7 @@ sync.forceSync(datasetId:string,success?: ()=> void, failure?: (err: string, dat
  
  ```
 see _./fh-sync-js.d.ts_ for more methods
+
+## Relation for fh-js-sdk
+
+Feedhenry JS SDK contains various libraries and also includes fh-sync-js library.
