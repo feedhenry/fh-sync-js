@@ -16,6 +16,7 @@ Server URL can be configured using following variables
 Setting up your own server see
 For example: 
 ```javascript
+
 syncClient.init({
     cloudUrl:"http://localhost:3000",
     do_console_log: true,
@@ -24,6 +25,7 @@ syncClient.init({
     storage_strategy: ['memory'],
     crashed_count_wait: 0
 });
+
 ```
 
 
@@ -48,7 +50,9 @@ https://developer.chrome.com/devtools
 https://developer.mozilla.org/en-US/docs/Tools/Tools_Toolbox
 
 
-## Some Available sync API methods
+## Some Available Typescript sync API methods
+
+datasetId is 
 
 ```typescript
  
@@ -56,38 +60,37 @@ https://developer.mozilla.org/en-US/docs/Tools/Tools_Toolbox
 sync.init(options: SyncOptions);
 
 // Register a callback function to be invoked when the sync service has notifications to communicate to the client.   
-sync.notify(dataset_id:string, callback(data));
+sync.notify(datasetId: string, callback:NotifyCallback);
  
 // Put a dataset under the management of the sync service. Calling manage multiple times for the same dataset will update the options and query_params but will not result in the dataset syncing multiple times 
-sync.manage(dataset_id:string, options:SyncOptions, query_params:{}, meta_data:{}, callback:());
+sync.manage(datasetId: string, options:SyncOptions, query_params:{}, meta_data:{}, callback:() => void);
   
 // Get a list of the records for the dataset.   
-sync.doList(dataset_id:string, success:(dataset:any), failure:(err:string, datasetId:string));
+sync.doList(datasetId: string, success:(dataset:any) => void, failure:(err:string, datasetId:string) => void);
  
 // Update the data associated with the unique id.
-sync.doCreate(dataset_id:string, data:any, success:(dataset:any), failure:(err:string, datasetId:string));
+sync.doCreate(datasetId: string, data:any, success:(obj:any) => void, failure?:(err:string, datasetId:string)=> void);
 
 // Read a single data record. 
-sync.doRead(dataset_id:string, uid:string, success:(dataset:any), failure:(err:string, datasetId:string));
+sync.doRead(datasetId:string, uid:string, success:(record:any)=> void, failure:(err:string, datasetId:string)=> void);
 
 // Update the data associated with the unique id.  
-sync.doUpdate(dataset_id, uid, data, success:(dataset:any), failure:(err:string, datasetId:string));
+sync.doUpdate(datasetId:string, uid:string, data:any, success:(obj:any)=> void, failure?:(err:string, datasetId:string)=> void);
 
 // Delete the data associated with the unique id. 
-sync.doDelete(dataset_id:string, uid:string, success:(dataset:any), failure:(err:string, datasetId:string));
+sync.doDelete(datasetId:string, uid:string, success?:(obj:any)=> void, failure?:(err:string, datasetId:string)=> void);
 
 //Start the sync loop if 'sync_active' option is set to false.    
-sync.startSync(dataset_id:string, success:(), failure:(obj:any));
+sync.startSync(datasetId:string, success:()=> void, failure?:(obj:any)=> void);
   
 // Stop the sync loop for a dataset. 
-sync.stopSync(dataset_id, success:(), failure:(obj:any));
-
+sync.stopSync(datasetId:string, success?:()=> void, failure?:(obj:any)=> void);
 
 // Run the sync loop almost immediately (within next 500 ms) if sync_active is true. 
-sync.doSync(dataset_id, success:(), failure?:(err:string, datasetId:string));
+sync.doSync(datasetId, success?:()=> void, failure?:(err:string, datasetId:string)=> void);
   
 // Run the sync loop almost immediately (within next 500 ms) even if sync_active is false.  
-sync.forceSync(dataset_id:string,success?: (), failure?: (err: string, datasetId: string));
+sync.forceSync(datasetId:string,success?: ()=> void, failure?: (err: string, datasetId: string)=> void);
  
  ```
 see _./fh-sync-js.d.ts_ for more methods
