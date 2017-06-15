@@ -317,6 +317,13 @@ declare module SyncClient {
          * @param handler - function that wraps underlying storage solution
          */
         function setStorageAdapter(handler: (dataset_id:string, isSave: boolean, cb: any) => void);
+
+        /**
+         * Allows to override default hashing method
+         *
+         * @param handler - function that wraps underlying hashing method
+         */
+        function setHashMethod(method: () => any);
 }
 
 export = SyncClient;

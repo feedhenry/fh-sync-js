@@ -527,7 +527,7 @@ var self = {
   },
 
   generateHash: function(object) {
-    var hash = CryptoJS.SHA1(self.sortedStringify(object));
+    var hash = self.getHashMethod(self.sortedStringify(object));
     return hash.toString();
   },
 
@@ -908,6 +908,11 @@ var self = {
   setStorageAdapter: function(adapter){
     self.getStorageAdapter = adapter;
   },
+
+  /** Allow to set custom hasing method **/
+  setHashMethod: function(method){
+    self.getHashMethod = method;
+  },
   
   getStorageAdapter: function(dataset_id, isSave, cb){
     var onFail = function(msg, err){
@@ -919,6 +924,8 @@ var self = {
       return cb(null, this);
     });
   },
+
+  getHashMethod: CryptoJS.SHA1,
 
   saveDataSet: function (dataset_id, cb) {
     self.getDataSet(dataset_id, function(dataset) {
@@ -1260,5 +1267,6 @@ module.exports = {
   clearCache: self.clearCache,
   setCloudHandler: self.setCloudHandler,
   doCloudCall: self.doCloudCall,
-  setStorageAdapter: self.setStorageAdapter
+  setStorageAdapter: self.setStorageAdapter,
+  setHashMethod: self.setHashMethod
 };
