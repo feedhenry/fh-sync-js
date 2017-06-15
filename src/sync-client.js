@@ -928,7 +928,7 @@ var self = {
   getEncryptionAdapter: function() {
     return {
       sha1: CryptoJS.SHA1
-    }
+    };
   },
 
   saveDataSet: function (dataset_id, cb) {
