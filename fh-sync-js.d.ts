@@ -323,7 +323,7 @@ declare module SyncClient {
          *
          * @param handler - function that wraps underlying hashing method
          */
-        function setHashMethdo(method: () => void);
+        function setHashMethod(method: () => void);
 }
 
 export = SyncClient;
