@@ -527,7 +527,7 @@ var self = {
   },
 
   generateHash: function(object) {
-    var hash = self.getEncryptionAdapter().sha1(self.sortedStringify(object));
+    var hash = self.getHashMethod(self.sortedStringify(object));
     return hash.toString();
   },
 
@@ -909,9 +909,9 @@ var self = {
     self.getStorageAdapter = adapter;
   },
 
-  /** Allow to set custom encryption adapter **/
-  setEncryptionAdapter: function(adapter){
-    self.getStorageAdapter = adapter;
+  /** Allow to set custom hasing method **/
+  setHashMethod: function(method){
+    self.getHashMethod = method;
   },
   
   getStorageAdapter: function(dataset_id, isSave, cb){
@@ -925,10 +925,8 @@ var self = {
     });
   },
 
-  getEncryptionAdapter: function() {
-    return {
-      sha1: CryptoJS.SHA1
-    };
+  getHashMethod: function() {
+    return CryptoJS.SHA1
   },
 
   saveDataSet: function (dataset_id, cb) {

@@ -319,11 +319,11 @@ declare module SyncClient {
         function setStorageAdapter(handler: (dataset_id:string, isSave: boolean, cb: any) => void);
 
         /**
-         * Allows to override default encryption adapter
+         * Allows to override default hashing method
          *
-         * @param handler - function that wraps underlying encryption solution
+         * @param handler - function that wraps underlying hashing method
          */
-        function setEncryptionAdapter(handler: () => void);
+        function setHashMethdo(method: () => void);
 }
 
 export = SyncClient;
