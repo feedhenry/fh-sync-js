@@ -317,6 +317,13 @@ declare module SyncClient {
          * @param handler - function that wraps underlying storage solution
          */
         function setStorageAdapter(handler: (dataset_id:string, isSave: boolean, cb: any) => void);
+
+        /**
+         * Allows to override default encryption adapter
+         *
+         * @param handler - function that wraps underlying encryption solution
+         */
+        function setEncryptionAdapter(handler: () => void);
 }
 
 export = SyncClient;

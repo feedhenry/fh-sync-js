@@ -527,7 +527,7 @@ var self = {
   },
 
   generateHash: function(object) {
-    var hash = CryptoJS.SHA1(self.sortedStringify(object));
+    var hash = self.getEncryptionAdapter.sha1(self.sortedStringify(object));
     return hash.toString();
   },
 
@@ -908,6 +908,11 @@ var self = {
   setStorageAdapter: function(adapter){
     self.getStorageAdapter = adapter;
   },
+
+  /** Allow to set custom encryption adapter **/
+  setEncryptionAdapter: function(adapter){
+    self.getStorageAdapter = adapter;
+  },
   
   getStorageAdapter: function(dataset_id, isSave, cb){
     var onFail = function(msg, err){
@@ -918,6 +923,12 @@ var self = {
     Lawnchair({fail:onFail, adapter: self.config.storage_strategy, size:self.config.file_system_quota, backup: self.config.icloud_backup}, function(){
       return cb(null, this);
     });
+  },
+
+  getEncryptionAdapter: function() {
+    return {
+      sha1: CryptoJS.SHA1
+    }
   },
 
   saveDataSet: function (dataset_id, cb) {
