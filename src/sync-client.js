@@ -527,7 +527,7 @@ var self = {
   },
 
   generateHash: function(object) {
-    var hash = self.getEncryptionAdapter.sha1(self.sortedStringify(object));
+    var hash = self.getEncryptionAdapter().sha1(self.sortedStringify(object));
     return hash.toString();
   },
 
