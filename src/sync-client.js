@@ -926,7 +926,7 @@ var self = {
   },
 
   getHashMethod: function() {
-    return CryptoJS.SHA1
+    return CryptoJS.SHA1;
   },
 
   saveDataSet: function (dataset_id, cb) {
