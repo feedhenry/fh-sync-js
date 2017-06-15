@@ -1267,5 +1267,6 @@ module.exports = {
   clearCache: self.clearCache,
   setCloudHandler: self.setCloudHandler,
   doCloudCall: self.doCloudCall,
-  setStorageAdapter: self.setStorageAdapter
+  setStorageAdapter: self.setStorageAdapter,
+  setHashMethod: self.setHashMethod
 };
