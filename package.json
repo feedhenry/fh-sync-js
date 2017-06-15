@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Javascript client for fh-sync offline synchronization library",
   "main": "src/index.js",
-  "types": "./fh-js-sdk.d.ts",
+  "types": "./fh-sync-js.d.ts",
   "browserify-shim": {
     "JSON": {
       "exports": "JSON"
