@@ -925,9 +925,7 @@ var self = {
     });
   },
 
-  getHashMethod: function() {
-    return CryptoJS.SHA1;
-  },
+  getHashMethod: CryptoJS.SHA1,
 
   saveDataSet: function (dataset_id, cb) {
     self.getDataSet(dataset_id, function(dataset) {
