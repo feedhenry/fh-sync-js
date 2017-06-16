@@ -128,7 +128,7 @@ declare module SyncClient {
      * Multiple values can be specified as an array and the first valid storage option will be used.
      * Optional. Default: 'html5-filesystem'
      */
-    storage_strategy?: "html5-filesystem" | "dom" | "webkit-sqlite" | "indexed-db" | any;
+    storage_strategy?: "html5-filesystem" | "dom" | "webkit-sqlite" | "indexed-db"
 
     /**
      * Amount of space to request from the HTML5 filesystem API when running in browser
@@ -137,7 +137,7 @@ declare module SyncClient {
     file_system_quota?: number,
 
     /**
-     * iOS only. If set to true, the file will be backed by iCloud.
+     * iOS only. If set to true, the file will be backed by iCloud. Default to false;
      */
     icloud_backup?: boolean
   }
@@ -155,6 +155,7 @@ declare module SyncClient {
    * Initialize the client data sync service.
    *
    * @param {Object} options
+   * @param {String} [options.cloudUrl=""] - Sync cloud url (used by default handler to call server)
    * @param {Number} [options.sync_frequency=10] - How often to synchronize data with the cloud, in seconds.
    * @param {Boolean} [options.auto_sync_local_updates=true] - Should local changes be synchronized to the cloud immediately, or should they wait for the next synchronization interval.
    * @param {Boolean} [options.notify_client_storage_failed=true] - Should a notification event be triggered when loading or saving to client storage fails.
@@ -174,13 +175,14 @@ declare module SyncClient {
    * @param {Boolean} [options.sync_active=true] - Is the background synchronization with the cloud currently active. If this is set to false, the synchronization loop will not start automatically. You need to call startSync to start the synchronization loop.
    * @param {String} [options.storage_strategy=html5_filesystem] - Storage strategy to use for the underlying client storage framework Lawnchair. Valid values include 'dom', 'html5-filesystem', 'webkit-sqlite', 'indexed-db'. Multiple values can be specified as an array and the first valid storage option will be used. If the app is running on Titanium, the only support value is 'titanium'.
    * @param {Number} [options.file_system_quota=52428800] - Amount of space to request from the HTML5 filesystem API when running in browser
-   * @param {Boolean} [options.icloud_backup=false] - iOS only. If set to true, the file will be backed by iCloud.
+   * @param {Boolean} [options.icloud_backup=false] - iOS only. If set to true, the file will be backed by iCloud. 
    */
   function init(options: SyncOptions): void;
 
   /**
    * Register a callback function to be invoked when the sync service has notifications to communicate to the client.
-   *
+   * 
+   * @param dataset_id - dataset identifier
    * @param {Function} callback
    */
   function notify(dataset_id: string, callback: NotifyCallback): void;
@@ -189,6 +191,7 @@ declare module SyncClient {
    *
    * @param {String} datasetId
    * @param {Object} options
+   * @param {String} [options.cloudUrl=""] - Sync cloud url (used by default handler to call server)
    * @param {Number} [options.sync_frequency=10] - How often to synchronize data with the cloud, in seconds.
    * @param {Boolean} [options.auto_sync_local_updates=true] - Should local changes be synchronized to the cloud immediately, or should they wait for the next synchronization interval.
    * @param {Boolean} [options.notify_client_storage_failed=true] - Should a notification event be triggered when loading or saving to client storage fails.
@@ -404,6 +407,8 @@ declare module SyncClient {
 
   /**
    * Sets cloud call handler for sync. Required to make any sync requests to the server side (sync cloud)
+   * 
+   * @param {Function} handler - method responsible for handling network requests
    */
   function setCloudHandler(handler: (params: any, success: (result: any) => void, failure: (error: any) => void) => void): void;
 
@@ -416,9 +421,9 @@ declare module SyncClient {
   /**
    * Allows to override default hashing method
    *
-   * @param handler - function that wraps underlying hashing method
+   * @param method - function that wraps underlying hashing method
    */
-  function setHashMethod(method: () => any);
+  function setHashMethod(method: () => any): void;
 }
 
 export = SyncClient;
