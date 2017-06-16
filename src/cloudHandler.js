@@ -1,8 +1,6 @@
 var cloudURL;
 var cloudPath;
-
-var uuidGenerator = require('uuid').v1;
-var CLIENT_ID_TAG = "feedhenry_sync_client";
+var cidProvider = require('./clientIdProvider');
 
 /**
  * Default sync cloud handler responsible for making all sync requests to 
@@ -16,10 +14,9 @@ var handler = function (params, success, failure) {
     var url = cloudURL + cloudPath + params.dataset_id;
     var payload = params.req;
     payload.__fh = {
-        cuid: getClientId(payload)
+        cuid: cidProvider.getClientId()
     };
     var json = JSON.stringify(payload);
-
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
@@ -44,31 +41,6 @@ var handler = function (params, success, failure) {
 };
 
 /**
- * Get client id 
- * 
- * @param {*} payload object to add parameter 
- */
-function getClientId(payload) {
-    if (window && window.device) {
-        return window.device.uuid;
-    }
-    if (navigator && navigator.device) {
-        return navigator.device.uuid;
-    }
-    if (window && window.localStorage) {
-        var clientId = window.localStorage.getItem(CLIENT_ID_TAG);
-        if (!clientId) {
-            clientId = uuidGenerator();
-            localStorage.setItem(CLIENT_ID_TAG, clientId);
-        }
-        return clientId;
-    } else {
-        throw Error("Cannot create and store client id");
-    }
-}
-
-
-/**
  * Default sync cloud handler init method
  * 
  * @param url - for example http://example.com:7000
@@ -82,5 +54,4 @@ var init = function (url, path) {
 module.exports = {
     handler: handler,
     init: init,
-    getClientId: getClientId
 };
