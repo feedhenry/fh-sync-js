@@ -1,5 +1,6 @@
 var cloudURL;
 var cloudPath;
+var cidProvider = require('./clientIdProvider');
 
 /**
  * Default sync cloud handler responsible for making all sync requests to 
@@ -11,8 +12,11 @@ var handler = function (params, success, failure) {
         cloudPath = '/sync/';
     }
     var url = cloudURL + cloudPath + params.dataset_id;
-    var json = JSON.stringify(params.req);
-
+    var payload = params.req;
+    payload.__fh = {
+        cuid: cidProvider.getClientId()
+    };
+    var json = JSON.stringify(payload);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
@@ -49,5 +53,5 @@ var init = function (url, path) {
 
 module.exports = {
     handler: handler,
-    init: init
+    init: init,
 };

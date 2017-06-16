@@ -4,23 +4,28 @@
   "dependencies": {
     "loglevel": {
       "version": "0.6.0",
-      "from": "loglevel@>=0.6.0 <0.7.0",
+      "from": "https://registry.npmjs.org/loglevel/-/loglevel-0.6.0.tgz",
       "resolved": "https://registry.npmjs.org/loglevel/-/loglevel-0.6.0.tgz"
     },
     "process": {
       "version": "0.6.0",
-      "from": "process@>=0.6.0 <0.7.0",
+      "from": "https://registry.npmjs.org/process/-/process-0.6.0.tgz",
       "resolved": "https://registry.npmjs.org/process/-/process-0.6.0.tgz"
     },
     "type-of": {
       "version": "2.0.1",
-      "from": "type-of@>=2.0.1 <2.1.0",
+      "from": "https://registry.npmjs.org/type-of/-/type-of-2.0.1.tgz",
       "resolved": "https://registry.npmjs.org/type-of/-/type-of-2.0.1.tgz"
     },
     "underscore": {
       "version": "1.6.0",
-      "from": "underscore@>=1.6.0 <1.7.0",
+      "from": "https://registry.npmjs.org/underscore/-/underscore-1.6.0.tgz",
       "resolved": "https://registry.npmjs.org/underscore/-/underscore-1.6.0.tgz"
+    },
+    "uuid": {
+      "version": "3.0.1",
+      "from": "uuid@latest",
+      "resolved": "https://registry.npmjs.org/uuid/-/uuid-3.0.1.tgz"
     }
   }
 }

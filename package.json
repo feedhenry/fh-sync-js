@@ -1,6 +1,6 @@
 {
   "name": "fh-sync-js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Javascript client for fh-sync offline synchronization library",
   "main": "src/index.js",
   "types": "./fh-sync-js.d.ts",
@@ -31,10 +31,11 @@
   "author": "Feedhenry Team",
   "license": "Apache 2.0",
   "dependencies": {
-    "type-of": "~2.0.1",
     "loglevel": "~0.6.0",
+    "process": "~0.6.0",
+    "type-of": "~2.0.1",
     "underscore": "~1.6.0",
-    "process": "~0.6.0"
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "async": "0.2.10",
