@@ -139,7 +139,15 @@ declare module SyncClient {
     /**
      * iOS only. If set to true, the file will be backed by iCloud. Default to false;
      */
-    icloud_backup?: boolean
+    icloud_backup?: boolean,
+
+    /* 
+     * If set, the client will resend the pending changes that are inflight, but haven't crashed, and have lived longer than this value.
+     * This is to prevent the situation where updates are lost for certain pending changes, those pending changes will be stuck on the client forever.
+     * Default value is 24 hours.
+     * Optional. Default: 60*24
+     */
+    resend_inflight_pendings_minutes?: number
   }
 
   /**

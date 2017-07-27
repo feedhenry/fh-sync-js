@@ -2,6 +2,8 @@ var CryptoJS = require("../libs/generated/crypto");
 var Lawnchair = require('../libs/generated/lawnchair');
 var defaultCloudHandler = require('./cloudHandler');
 
+var MILLISECONDS_IN_MINUTE = 60*1000;
+
 var self = {
 
   // CONFIG
@@ -44,7 +46,11 @@ var self = {
     // Storage strategy to use for Lawnchair - supported strategies are 'html5-filesystem' and 'dom'
     "file_system_quota" : 50 * 1024 * 1204,
     // Amount of space to request from the HTML5 filesystem API when running in browser
-    "icloud_backup" : false //ios only. If set to true, the file will be backed by icloud
+    "icloud_backup" : false, //ios only. If set to true, the file will be backed by icloud
+    // If set, the client will resend those inflight pending changes that have lived longer than this value.
+    // This is to prevent the situation where updates are lost for certain pending changes, those pending changes will be stuck on the client forever.
+    // Default value is 24 hours.
+    "resend_inflight_pendings_minutes": 60*24
   },
 
   notifications: {
@@ -531,6 +537,18 @@ var self = {
     return hash.toString();
   },
 
+  shouldResendInflightPending: function(dataSet, pendingRecord) {
+    if (dataSet.config && dataSet.config.resend_inflight_pendings_minutes > 0 && pendingRecord.inFlight && pendingRecord.inFlightDate && !pendingRecord.crashed) {
+      var now = new Date().getTime();
+      var elapsedSinceSubmission = now - pendingRecord.inFlightDate;
+      if ( elapsedSinceSubmission >= dataSet.config.resend_inflight_pendings_minutes * MILLISECONDS_IN_MINUTE) {
+        return true;
+      }
+    }
+
+    return false;
+  },
+
   addPendingObj: function(dataset_id, uid, data, action, success, failure) {
     self.isOnline(function (online) {
       if (!online) {
@@ -619,6 +637,9 @@ var self = {
               if( !pending[i].inFlight && !pending[i].crashed && !pending[i].delayed) {
                 pending[i].inFlight = true;
                 pending[i].inFlightDate = new Date().getTime();
+                pendingArray.push(pending[i]);
+              }
+              if( self.shouldResendInflightPending(dataSet, pending[i]) ) {
                 pendingArray.push(pending[i]);
               }
             }
