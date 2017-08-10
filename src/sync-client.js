@@ -314,8 +314,10 @@ var self = {
     });
   },
 
-
-  // PRIVATE FUNCTIONS
+  /**
+   * Check if client is online. 
+   * Function is used to stop sync from executing requests.
+   */
   isOnline: function(callback) {
     var online = true;
 
@@ -338,6 +340,7 @@ var self = {
     return callback(online);
   },
 
+  // PRIVATE FUNCTIONS
   doNotify: function(dataset_id, uid, code, message) {
 
     if( self.notify_callback || self.notify_callback_map[dataset_id]) {
@@ -1289,5 +1292,6 @@ module.exports = {
   setCloudHandler: self.setCloudHandler,
   doCloudCall: self.doCloudCall,
   setStorageAdapter: self.setStorageAdapter,
-  setHashMethod: self.setHashMethod
+  setHashMethod: self.setHashMethod,
+  isOnline : self.isOnline
 };
