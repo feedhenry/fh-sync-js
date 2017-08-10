@@ -315,6 +315,16 @@ var self = {
   },
 
   /**
+   * Allows to override default method for checking if application is online
+   *
+   * @param handler - function that checks if network is available
+   */
+  setNetworkStatusHandler: function(handler){
+    self.isOnline = handler;
+  },
+  
+  // PRIVATE FUNCTIONS
+  /**
    * Check if client is online. 
    * Function is used to stop sync from executing requests.
    */
@@ -340,7 +350,6 @@ var self = {
     return callback(online);
   },
 
-  // PRIVATE FUNCTIONS
   doNotify: function(dataset_id, uid, code, message) {
 
     if( self.notify_callback || self.notify_callback_map[dataset_id]) {
@@ -1293,5 +1302,5 @@ module.exports = {
   doCloudCall: self.doCloudCall,
   setStorageAdapter: self.setStorageAdapter,
   setHashMethod: self.setHashMethod,
-  isOnline : self.isOnline
+  setNetworkStatusHandler : self.setNetworkStatusHandler
 };
