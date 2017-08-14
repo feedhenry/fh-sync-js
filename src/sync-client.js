@@ -1,6 +1,7 @@
 var CryptoJS = require("../libs/generated/crypto");
 var Lawnchair = require('../libs/generated/lawnchair');
 var defaultCloudHandler = require('./cloudHandler');
+var cidProvider = require('./clientIdProvider');
 
 var MILLISECONDS_IN_MINUTE = 60*1000;
 
@@ -910,6 +911,11 @@ var self = {
 
   doCloudCall: function(params, success, failure) {
     if(self.cloudHandler && typeof self.cloudHandler === "function" ){
+      if (params && params.req) {
+        params.req.__fh = {
+          cuid: cidProvider.getClientId()
+        };
+      }
       self.cloudHandler(params, success, failure);
     } else {
       console.log("Missing cloud handler for sync. Please refer to documentation");
