@@ -437,9 +437,9 @@ declare module SyncClient {
   /**
    * Allows to override default method for checking if application is online
    *
-   * @param method - function that checks if network is available
+   * @param handlerFunction - function that implements checks for network availability
    */
-  function setNetworkStatusHandler(method: (callback: (isOnline: boolean) => void) => void): void;
+  function setNetworkStatusHandler(handlerFunction: (callback: (isOnline: boolean) => void) => void): void;
 }
 
 export = SyncClient;
