@@ -189,11 +189,19 @@ declare module SyncClient {
 
   /**
    * Register a callback function to be invoked when the sync service has notifications to communicate to the client.
-   * 
-   * @param dataset_id - dataset identifier
+   *
+   * @param dataset_id - id of dataset to recieve notifications
    * @param {Function} callback
    */
   function notify(dataset_id: string, callback: NotifyCallback): void;
+
+  /**
+   * Register a callback function to be invoked when the sync service has notifications to communicate to the client.
+   *
+   * @param {Function} callback
+   */
+  function notify(callback: NotifyCallback): void;
+
   /**
    * Put a dataset under the management of the sync service.
    *
