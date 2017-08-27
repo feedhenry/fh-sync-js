@@ -315,8 +315,24 @@ var self = {
     });
   },
 
-
+  /**
+   * Allows to override default method for checking if application is online
+   *
+   * @param handlerFunction - function that checks if network is available
+   */
+  setNetworkStatusHandler: function(handlerFunction){
+    if (handler && typeof handler === "function") {
+      self.isOnline = handler;
+    } else {
+      self.consoleLog("setNetworkStatusHandler called  with wrong parameter");
+    }
+  },
+  
   // PRIVATE FUNCTIONS
+  /**
+   * Check if client is online. 
+   * Function is used to stop sync from executing requests.
+   */
   isOnline: function(callback) {
     var online = true;
 
@@ -905,8 +921,12 @@ var self = {
    * Sets cloud handler for sync responsible for making network requests:
    * For example function(params, success, failure)
    */
-  setCloudHandler: function(cloudHandler){
-    self.cloudHandler = cloudHandler;
+  setCloudHandler: function(cloudHandler) {
+    if (cloudHandler && typeof cloudHandler === "function") {
+      self.cloudHandler = cloudHandler;
+    } else {
+      self.consoleLog("setCloudHandler called  with wrong parameter");
+    }
   },
 
   doCloudCall: function(params, success, failure) {
@@ -937,8 +957,12 @@ var self = {
   },
 
   /** Allow to set custom hasing method **/
-  setHashMethod: function(method){
-    self.getHashMethod = method;
+  setHashMethod: function(method) {
+    if (method && typeof method === "function") {
+      self.getHashMethod = method;
+    } else {
+      self.consoleLog("setHashMethod called  with wrong parameter");
+    }
   },
   
   getStorageAdapter: function(dataset_id, isSave, cb){
@@ -1292,8 +1316,9 @@ module.exports = {
   generateHash: self.generateHash,
   loadDataSet: self.loadDataSet,
   clearCache: self.clearCache,
-  setCloudHandler: self.setCloudHandler,
   doCloudCall: self.doCloudCall,
+  setCloudHandler: self.setCloudHandler,
   setStorageAdapter: self.setStorageAdapter,
-  setHashMethod: self.setHashMethod
+  setHashMethod: self.setHashMethod,
+  setNetworkStatusHandler : self.setNetworkStatusHandler
 };

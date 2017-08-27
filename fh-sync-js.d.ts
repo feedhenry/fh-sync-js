@@ -434,12 +434,20 @@ declare module SyncClient {
    * @param handler - function that wraps underlying storage solution
    */
   function setStorageAdapter(handler: (dataset_id: string, isSave: boolean, cb: any) => void): void;
+
   /**
    * Allows to override default hashing method
    *
    * @param method - function that wraps underlying hashing method
    */
   function setHashMethod(method: () => any): void;
+
+  /**
+   * Allows to override default method for checking if application is online
+   *
+   * @param handlerFunction - function that implements checks for network availability
+   */
+  function setNetworkStatusHandler(handlerFunction: (callback: (isOnline: boolean) => void) => void): void;
 }
 
 export = SyncClient;
