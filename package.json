@@ -33,6 +33,7 @@
   "dependencies": {
     "loglevel": "~0.6.0",
     "process": "~0.6.0",
+    "request": "^2.81.0",
     "type-of": "~2.0.1",
     "underscore": "~1.6.0",
     "uuid": "^3.0.1"
