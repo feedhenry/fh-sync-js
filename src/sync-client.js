@@ -2,6 +2,9 @@ var CryptoJS = require("../libs/generated/crypto");
 var Lawnchair = require('../libs/generated/lawnchair');
 var defaultCloudHandler = require('./cloudHandler');
 var cidProvider = require('./clientIdProvider');
+var _ = require("underscore");
+
+var createCloudHandler = require('./cloudHandler/createCloudHandler');
 
 var MILLISECONDS_IN_MINUTE = 60*1000;
 
@@ -30,7 +33,7 @@ var self = {
     "notify_remote_update_applied": true,
     // Should a notification event be triggered when an update was applied to the remote data store
     "notify_delta_received": true,
-    // Should a notification event be triggered when a delta was received from the remote data store for the dataset 
+    // Should a notification event be triggered when a delta was received from the remote data store for the dataset
     "notify_record_delta_received": true,
     // Should a notification event be triggered when a delta was received from the remote data store for a record
     "notify_sync_failed": true,
@@ -72,9 +75,9 @@ var self = {
     "LOCAL_UPDATE_APPLIED": "local_update_applied",
     // An update was applied to the local data store
     "DELTA_RECEIVED": "delta_received",
-    // A delta was received from the remote data store for the dataset 
+    // A delta was received from the remote data store for the dataset
     "RECORD_DELTA_RECEIVED": "record_delta_received",
-    // A delta was received from the remote data store for the record 
+    // A delta was received from the remote data store for the record
     "SYNC_FAILED": "sync_failed"
     // Sync loop failed to complete
   },
@@ -327,10 +330,10 @@ var self = {
       self.consoleLog("setNetworkStatusHandler called  with wrong parameter");
     }
   },
-  
+
   // PRIVATE FUNCTIONS
   /**
-   * Check if client is online. 
+   * Check if client is online.
    * Function is used to stop sync from executing requests.
    */
   isOnline: function(callback) {
@@ -624,7 +627,7 @@ var self = {
 
   syncLoop: function(dataset_id) {
     self.getDataSet(dataset_id, function(dataSet) {
-    
+
       // The sync loop is currently active
       dataSet.syncPending = false;
       dataSet.syncRunning = true;
@@ -762,7 +765,7 @@ var self = {
             self.doNotify(dataset_id, i, self.notifications.RECORD_DELTA_RECEIVED, "create");
           }
         }
-        
+
         if (res.update) {
           for (i in res.update) {
             localDataSet[i].hash = res.update[i].hash;
@@ -950,7 +953,7 @@ var self = {
       self.datasetMonitor();
     }, 500);
   },
-  
+
   /** Allow to set custom storage adapter **/
   setStorageAdapter: function(adapter){
     self.getStorageAdapter = adapter;
@@ -964,7 +967,7 @@ var self = {
       self.consoleLog("setHashMethod called  with wrong parameter");
     }
   },
-  
+
   getStorageAdapter: function(dataset_id, isSave, cb){
     var onFail = function(msg, err){
       var errMsg = (isSave?'save to': 'load from' ) + ' local storage failed msg: ' + msg + ' err: ' + err;
@@ -1230,7 +1233,7 @@ var self = {
           var pendingHash = metadata.pendingUid;
           self.consoleLog("updateMetaFromNewData - Found metadata with uid = " + uid + " :: pendingHash = " + pendingHash);
           var pendingResolved = true;
-  
+
           if(pendingHash){
             //we have current pending in meta data, see if it's resolved
             pendingResolved = false;
@@ -1316,8 +1319,9 @@ module.exports = {
   generateHash: self.generateHash,
   loadDataSet: self.loadDataSet,
   clearCache: self.clearCache,
-  doCloudCall: self.doCloudCall,
+  createCloudHandler: createCloudHandler,
   setCloudHandler: self.setCloudHandler,
+  doCloudCall: self.doCloudCall,
   setStorageAdapter: self.setStorageAdapter,
   setHashMethod: self.setHashMethod,
   setNetworkStatusHandler : self.setNetworkStatusHandler

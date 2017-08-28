@@ -141,13 +141,33 @@ declare module SyncClient {
      */
     icloud_backup?: boolean,
 
-    /* 
+    /*
      * If set, the client will resend the pending changes that are inflight, but haven't crashed, and have lived longer than this value.
      * This is to prevent the situation where updates are lost for certain pending changes, those pending changes will be stuck on the client forever.
      * Default value is 24 hours.
      * Optional. Default: 60*24
      */
     resend_inflight_pendings_minutes?: number
+  }
+
+  /**
+   * Interface for a header option in CloudHandlerOptions
+   *
+   * @interface CloudHandlerHeader
+   */
+  interface CloudHandlerHeader {
+    name: string,
+    value: string
+  }
+
+  /**
+   * Interface for the options provided to createCloudHandler
+   *
+   * @interface CloudHandlerOptions
+   */
+  interface CloudHandlerOptions {
+    cloudPath?: string,
+    headers?: CloudHandlerHeader[]
   }
 
   /**
@@ -183,7 +203,7 @@ declare module SyncClient {
    * @param {Boolean} [options.sync_active=true] - Is the background synchronization with the cloud currently active. If this is set to false, the synchronization loop will not start automatically. You need to call startSync to start the synchronization loop.
    * @param {String} [options.storage_strategy=html5_filesystem] - Storage strategy to use for the underlying client storage framework Lawnchair. Valid values include 'dom', 'html5-filesystem', 'webkit-sqlite', 'indexed-db'. Multiple values can be specified as an array and the first valid storage option will be used. If the app is running on Titanium, the only support value is 'titanium'.
    * @param {Number} [options.file_system_quota=52428800] - Amount of space to request from the HTML5 filesystem API when running in browser
-   * @param {Boolean} [options.icloud_backup=false] - iOS only. If set to true, the file will be backed by iCloud. 
+   * @param {Boolean} [options.icloud_backup=false] - iOS only. If set to true, the file will be backed by iCloud.
    */
   function init(options: SyncOptions): void;
 
@@ -423,10 +443,22 @@ declare module SyncClient {
 
   /**
    * Sets cloud call handler for sync. Required to make any sync requests to the server side (sync cloud)
-   * 
+   *
    * @param {Function} handler - method responsible for handling network requests
    */
   function setCloudHandler(handler: (params: any, success: (result: any) => void, failure: (error: any) => void) => void): void;
+
+  /**
+   * Create a cloud handler to be used with setCloudHandler().
+   *
+   * @param {string} baseUrl Url of the server without any paths, e.g https://feedhenry.com
+   * @param {Object} options
+   * @param {Object[]} options.headers List of headers to append to each request
+   * @param {string} options.headers.name Name of header, e.g. Content-Type
+   * @param {string} options.headers.value Value of header, e.g. application/json
+   * @param {string} options.cloudPath Path to append to baseUrl
+   */
+  function createCloudHandler(baseUrl: string, options: CloudHandlerOptions): void;
 
   /**
    * Allows to override default storage adapter
