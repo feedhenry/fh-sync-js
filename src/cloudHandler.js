@@ -14,6 +14,7 @@ var handler = function (params, success, failure) {
     var payload = params.req;
     var json = JSON.stringify(payload);
     var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
     xhr.open("POST", url, true);
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhr.onreadystatechange = function () {
