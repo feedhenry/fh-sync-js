@@ -6,7 +6,7 @@ Library can be used for offline storage of mobile applications data.
 
 ## Required setup
 
-To use the sync client you need a sync server setup first see https://github.com/feedhenry/fh-sync .
+To use the sync client you need a sync server setup first see https://github.com/feedhenry/fh-sync or https://github.com/feedhenry/fh-sync-server.
 Sync client using default Ajax handler to call sync server.   
 Server URL can be configured using following variables 
 
@@ -33,6 +33,10 @@ syncClient.init({
 
     npm install
     grunt 
+
+## Cordova client template
+
+You can try [Cordova Sync Template](https://github.com/feedhenry-templates/feedhenry-cordova-sync-app). It uses fh-sync-js as a library for connecting to running sync server instance.
 
 ## Relation for fh-js-sdk
 
