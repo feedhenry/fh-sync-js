@@ -146,6 +146,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('concat-core-sdk', ['jshint',  'concat:lawnchair', 'concat:crypto', 'browserify:dist']);
 
+  grunt.registerTask('build', ['concat-core-sdk', 'uglify:dist']);
 
-  grunt.registerTask('default', ['jshint', 'concat-core-sdk', 'test','uglify:dist']);
+  grunt.registerTask('default', ['jshint', 'concat-core-sdk', 'test',]);
 };

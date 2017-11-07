@@ -22,7 +22,7 @@
     ]
   },
   "scripts": {
-    "build": "grunt",
+    "build": "grunt build",
     "test": "grunt test"
   },
   "repository": {
