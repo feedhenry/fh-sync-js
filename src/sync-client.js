@@ -9,6 +9,8 @@ module.exports = newClient;
 
 function newClient(id) {
 
+  var clientId = (id || '') + cidProvider.getClientId();
+
   var self = {
 
     // CONFIG
@@ -937,7 +939,7 @@ function newClient(id) {
       if(self.cloudHandler && typeof self.cloudHandler === "function" ){
         if (params && params.req) {
           params.req.__fh = {
-            cuid: cidProvider.getClientId()
+            cuid: clientId
           };
         }
         self.cloudHandler(params, success, failure);
