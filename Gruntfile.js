@@ -148,5 +148,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', ['concat-core-sdk', 'uglify:dist']);
 
-  grunt.registerTask('default', ['jshint', 'concat-core-sdk', 'test',]);
+  grunt.registerTask('default', ['jshint', 'concat-core-sdk', 'test', 'uglify:dist']);
 };
