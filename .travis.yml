@@ -6,4 +6,4 @@ before_install:
   - npm install -g npm@3
 install: npm install
 script:
-  - npm test
+  - npm ci
