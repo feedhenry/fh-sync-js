@@ -2,12 +2,11 @@
 // Project: https://github.com/feedhenry/fh-sync-js
 // Definitions by: feedhenry-raincatcher@redhat.com
 
-
 /**
- * Interface for the data provided in the NotifyCallback in the notify function.
+ * interface for the data provided in the NotifyCallback in the notify function.
  * @interface NotificationData
  */
-export interface NotificationData {
+interface NotificationData {
   dataset_id: string;
   uid: string;
   message?: string;
@@ -19,7 +18,7 @@ export interface NotificationData {
  *
  * @interface SyncOptions
  */
-export interface SyncOptions {
+interface SyncOptions {
   /**
    * Sync cloud url (used by default handler to call server)
    */
@@ -153,14 +152,14 @@ export interface SyncOptions {
  *
  * @interface NotifyCallback
  */
-export interface NotifyCallback {
+interface NotifyCallback {
   (data: NotificationData): any
 }
 
 /**
  * Interface for everything a sync client can do
  */
-export interface SyncApi {
+interface SyncApi {
 
   /**
    * Initialize the client data sync service.
