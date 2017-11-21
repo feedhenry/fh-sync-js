@@ -23,7 +23,8 @@
   },
   "scripts": {
     "build": "grunt build",
-    "test": "grunt test"
+    "test": "grunt test",
+    "ci": "grunt"
   },
   "repository": {
     "type": "git",
