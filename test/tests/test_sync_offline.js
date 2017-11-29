@@ -1,6 +1,6 @@
 var process = require("process");
 
-var syncClient = require("../../src/sync-client");
+var syncClient = require("../../src/sync-client")();
 var chai = require('chai');
 var expect = chai.expect;
 var sinonChai = require('sinon-chai');
