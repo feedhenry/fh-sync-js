@@ -1,5 +1,5 @@
 var CryptoJS = require("../libs/generated/crypto");
-var Lawnchair = require('../libs/generated/lawnchair');
+var Lawnchair = require('../libs/lawnchair/lawnchair');
 var defaultCloudHandler = require('./cloudHandler');
 var cidProvider = require('./clientIdProvider');
 
@@ -10,7 +10,7 @@ module.exports = newClient;
 function newClient(id) {
 
   var clientId = (id || '') + cidProvider.getClientId();
-
+  
   var self = {
 
     // CONFIG

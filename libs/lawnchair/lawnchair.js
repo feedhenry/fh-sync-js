@@ -4,7 +4,7 @@
  * clientside json store
  *
  */
-var Lawnchair = function (options, callback) {
+var Lawnchair = module.exports = function (options, callback) {
   // ensure Lawnchair was called as a constructor
   if (!(this instanceof Lawnchair)) return new Lawnchair(options, callback);
 
@@ -163,3 +163,11 @@ Lawnchair.prototype = {
   }
 // --
 };
+
+require('./lawnchairHtml5FileSystem')(Lawnchair)
+require('./lawnchairIndexDbAdapter')(Lawnchair)
+require('./lawnchairLocalStorageAdapter')(Lawnchair)
+require('./lawnchairMemoryAdapter')(Lawnchair)
+require('./lawnchairTitanium')(Lawnchair)
+require('./lawnchairWebkitSqlAdapter')(Lawnchair)
+require('./lawnchairWindowNameStorageAdapter')(Lawnchair)

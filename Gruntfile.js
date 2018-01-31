@@ -20,30 +20,12 @@ module.exports = function(grunt) {
       }
     },
     concat: {
-      lawnchair: {
-        src: [
-          "libs/lawnchair/lawnchair.js",
-          "libs/lawnchair/lawnchairWindowNameStorageAdapter.js",
-          "libs/lawnchair/lawnchairLocalStorageAdapter.js",
-          "libs/lawnchair/lawnchairWebkitSqlAdapter.js",
-          "libs/lawnchair/lawnchairIndexDbAdapter.js",
-          "libs/lawnchair/lawnchairHtml5FileSystem.js",
-          "libs/lawnchair/lawnchairMemoryAdapter.js"
-        ],
-        dest: "libs/generated/lawnchair.js"
-      },
       crypto: {
         src:[
           "libs/cryptojs/cryptojs-core.js",
-          "libs/cryptojs/cryptojs-enc-base64.js",
           "libs/cryptojs/cryptojs-cipher-core.js",
-          "libs/cryptojs/cryptojs-aes.js",
-          "libs/cryptojs/cryptojs-md5.js",
           "libs/cryptojs/cryptojs-sha1.js",
-          "libs/cryptojs/cryptojs-x64-core.js",
-          "libs/cryptojs/cryptojs-sha256.js",
-          "libs/cryptojs/cryptojs-sha512.js",
-          "libs/cryptojs/cryptojs-sha3.js"
+          "libs/cryptojs/cryptojs-x64-core.js"
         ],
         dest: "libs/generated/crypto.js"
       }
@@ -144,7 +126,7 @@ module.exports = function(grunt) {
   //run tests in phatomjs
   grunt.registerTask('test', ['jshint:all', 'browserify:dist', 'browserify:require', 'browserify:test', 'connect:server', 'mocha_phantomjs:test']);
 
-  grunt.registerTask('concat-core-sdk', ['jshint',  'concat:lawnchair', 'concat:crypto', 'browserify:dist']);
+  grunt.registerTask('concat-core-sdk', ['jshint', 'concat:crypto', 'browserify:dist']);
 
   grunt.registerTask('build', ['concat-core-sdk', 'uglify:dist']);
 

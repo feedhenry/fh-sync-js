@@ -8,7 +8,6 @@ tmp/*
 *.swp
 .fhclocal/
 dist/
-libs/generated/lawnchair.js
 test/sync/testServer
 src/modules-cov/*
 src-cov/*
