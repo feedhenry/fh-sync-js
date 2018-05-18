@@ -591,8 +591,9 @@ function newClient(id) {
           if(self.config.auto_sync_local_updates) {
             dataset.syncPending = true;
           }
-          self.saveDataSet(dataset_id);
-          self.doNotify(dataset_id, uid, self.notifications.LOCAL_UPDATE_APPLIED, action);
+          self.saveDataSet(dataset_id, function() {
+            self.doNotify(dataset_id, uid, self.notifications.LOCAL_UPDATE_APPLIED, action);
+          });
 
           success(obj);
         }, function(code, msg) {
@@ -802,8 +803,9 @@ function newClient(id) {
       self.getDataSet(dataset_id, function(dataset) {
         dataset.syncRunning = false;
         dataset.syncLoopEnd = new Date().getTime();
-        self.saveDataSet(dataset_id);
-        self.doNotify(dataset_id, dataset.hash, notification, status);
+        self.saveDataSet(dataset_id, function() {
+          self.doNotify(dataset_id, dataset.hash, notification, status);
+        });
       });
     },
 
