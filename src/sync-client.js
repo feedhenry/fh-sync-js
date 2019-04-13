@@ -973,12 +973,13 @@ function newClient(id) {
       }
     },
     
-    getStorageAdapter: function(dataset_id, isSave, cb){
+    getStorageAdapter: function (dataset_id, isSave, cb) {
       var onFail = function(msg, err){
         var errMsg = (isSave?'save to': 'load from' ) + ' local storage failed msg: ' + msg + ' err: ' + err;
         self.doNotify(dataset_id, null, self.notifications.CLIENT_STORAGE_FAILED, errMsg);
         self.consoleLog(errMsg);
       };
+     
       Lawnchair({
         name: id,
         fail: onFail, 
@@ -995,9 +996,13 @@ function newClient(id) {
     saveDataSet: function (dataset_id, cb) {
       self.getDataSet(dataset_id, function(dataset) {
         self.getStorageAdapter(dataset_id, true, function(err, storage){
-          storage.save({key:"dataset_" + dataset_id, val:dataset}, function(){
+          storage.save({ key: "dataset_" + dataset_id, val: dataset }, function () {
+            //close connection [at this point, for indexed DB only]
+            if (typeof storage.close === 'function') {
+              storage.close();
+            }
             //save success
-            if(cb) {
+            if (cb) {
               return cb();
             }
           });
