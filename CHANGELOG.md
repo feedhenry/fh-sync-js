@@ -1,5 +1,10 @@
 # Changelog - fh-sync-js lib
 
+
+## 1.4.0 - 2019-04-15
+## Change
+- Change in the Storage Adapter in order to allow it works with IOS 12 webkit update. (IOS 12 still not supported by RHMAP) 
+
 ## 1.3.2 - 2018-09-27
 ## Fix
 - Fix intermittent issue where sync events are sent before the action be actually performed.
