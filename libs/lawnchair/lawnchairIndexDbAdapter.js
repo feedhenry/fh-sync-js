@@ -31,7 +31,16 @@ module.exports = function (Lawnchair) {
         //FEEDHENRY CHANGE TO ALLOW ERROR CALLBACK
         if(options && 'function' === typeof options.fail) fail = options.fail
         //END CHANGE
+        
+        var to = setTimeout(function(){
+          if (request.readyState != 'done') {
+            console.error('opendb request is still not ready. current readyState: ' + request.readyState + '. Returning error.');
+            return fail(new Error('OPEN_DB_ERROR'));
+          }
+        }, 2000);
+
         request.onupgradeneeded = function (event) {
+          clearTimeout(to);
           self.store = request.result.createObjectStore("teststore", { autoIncrement: true });
           for (var i = 0; i < self.waiting.length; i++) {
             self.waiting[i].call(self);
@@ -41,6 +50,7 @@ module.exports = function (Lawnchair) {
         };
 
         request.onsuccess = function (event) {
+          clearTimeout(to);
           self.db = request.result;
 
           if (self.db.version != "2.0") {
@@ -72,7 +82,11 @@ module.exports = function (Lawnchair) {
           }
         };
 
-        request.onerror = fail;
+        request.onerror = function(){
+          clearTimeout(to);
+          var error = request.error;
+          fail(error);
+        };
       },
 
       save:function(obj, callback) {
