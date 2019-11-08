@@ -1,5 +1,8 @@
 # Changelog - fh-sync-js lib
 
+## 1.4.1 - 2019-11-07
+## Change
+- Emit an error if it takes too long to open index-db.
 
 ## 1.4.0 - 2019-04-15
 ## Change

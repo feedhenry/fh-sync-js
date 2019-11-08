@@ -974,9 +974,11 @@ function newClient(id) {
     },
     
     getStorageAdapter: function (dataset_id, isSave, cb) {
-      var onFail = function(msg, err){
-        var errMsg = (isSave?'save to': 'load from' ) + ' local storage failed msg: ' + msg + ' err: ' + err;
-        self.doNotify(dataset_id, null, self.notifications.CLIENT_STORAGE_FAILED, errMsg);
+      var onFail = function(err){
+        err = err || new Error('storage error');
+        var msg = err.message || err;
+        var errMsg = (isSave?'save to': 'load from' ) + ' local storage failed msg: ' + msg;
+        self.doNotify(dataset_id, null, self.notifications.CLIENT_STORAGE_FAILED, msg);
         self.consoleLog(errMsg);
       };
      

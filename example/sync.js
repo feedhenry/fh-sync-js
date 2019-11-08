@@ -6,7 +6,7 @@ $fh.sync.init({
     "cloudUrl": "http://localhost:3000",
     "sync_frequency": 10,
     "do_console_log": true,
-    "storage_strategy": "dom"
+    "storage_strategy": "indexed-db"
 });
 
 //provide listeners for notifications.
