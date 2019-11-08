@@ -1,5 +1,9 @@
 # Changelog - fh-sync-js lib
 
+## 1.4.2 - 2019-11-08
+## Change
+- Add a new `CONNECTION_TO_STORAGE_FAILED` notification if the sync client can't connect to index-db
+
 ## 1.4.1 - 2019-11-07
 ## Change
 - Emit an error if it takes too long to open index-db.
