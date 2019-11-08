@@ -62,7 +62,9 @@ function newClient(id) {
 
     notifications: {
       "CLIENT_STORAGE_FAILED": "client_storage_failed",
-      // loading/saving to client storage failed
+      // loading/saving to client storage failed,
+      "CONNECTION_TO_STORAGE_FAILED": "connection_to_storage_failed",
+      // when connection is lost to storage strategy
       "SYNC_STARTED": "sync_started",
       // A sync cycle with the server has been started
       "SYNC_COMPLETE": "sync_complete",
@@ -975,10 +977,11 @@ function newClient(id) {
     
     getStorageAdapter: function (dataset_id, isSave, cb) {
       var onFail = function(err){
+        var notifyMsg = err && err.message === 'OPEN_DB_ERROR' ? self.notifications.CONNECTION_TO_STORAGE_FAILED: self.notifications.CLIENT_STORAGE_FAILED;
         err = err || new Error('storage error');
         var msg = err.message || err;
         var errMsg = (isSave?'save to': 'load from' ) + ' local storage failed msg: ' + msg;
-        self.doNotify(dataset_id, null, self.notifications.CLIENT_STORAGE_FAILED, msg);
+        self.doNotify(dataset_id, null, notifyMsg, msg);
         self.consoleLog(errMsg);
       };
      
