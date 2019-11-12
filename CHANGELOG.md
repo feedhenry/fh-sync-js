@@ -1,4 +1,7 @@
 # Changelog - fh-sync-js lib
+## 1.4.3 - 2019-11-12
+## Change
+- Add the missing flag for the `CONNECTION_TO_STORAGE_FAILED` notification
 
 ## 1.4.2 - 2019-11-08
 ## Change
