@@ -21,6 +21,8 @@ function newClient(id) {
       // Should local chages be syned to the cloud immediately, or should they wait for the next sync interval
       "notify_client_storage_failed": true,
       // Should a notification event be triggered when loading/saving to client storage fails
+      "notify_connection_to_storage_failed": true,
+      // Should a notification event be triggered when connection to client storage fails
       "notify_sync_started": true,
       // Should a notification event be triggered when a sync cycle with the server has been started
       "notify_sync_complete": true,
