@@ -42,6 +42,9 @@ interface SyncOptions {
   */
   notify_client_storage_failed?: boolean,
 
+  /** Should a notification event be triggered when connection to client storage fails. ...*/
+  notify_connection_to_storage_failed?: boolean,
+
   /**
    * Should a notification event be triggered when a synchronization cycle with the server has been started.
    * Optional. Default: true
